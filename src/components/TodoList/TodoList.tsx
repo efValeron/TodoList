@@ -1,9 +1,11 @@
 import React from "react";
+import {FilterValuesType} from "../../App";
 
 type PropsType = {
-  header?: string
-  header2?: string
+  header: string
   tasks: Array<Task>
+  removeTaskFunc: (id: number) => void
+  changeFilterFunc: (value: FilterValuesType) => void
 }
 
 type Task = {
@@ -13,10 +15,7 @@ type Task = {
 }
 
 export const TodoList = (props: PropsType) => {
-  let lis = []
-  props.tasks.map(task => {
-    lis.push("<li><input type=\"checkbox\" checked={task.isDone}/> <span>{task.title}</span></li>")
-  })
+  const removeTask = (id: number) => props.removeTaskFunc(id)
 
   return (
     <div>
@@ -25,20 +24,21 @@ export const TodoList = (props: PropsType) => {
         <input/>
         <button>+</button>
       </div>
-      <ul>
+      <div style={{display: "flex", justifyContent: "space-between", marginTop: "10px"}}>
+        <button onClick={() => props.changeFilterFunc("all")}>All</button>
+        <button onClick={() => props.changeFilterFunc("active")}>Active</button>
+        <button onClick={() => props.changeFilterFunc("completed")}>Completed</button>
+      </div>
+      <ul style={{display: "flex", flexDirection: "column", margin: "20px 0", padding: 0, gap: "5px"}}>
         {props.tasks.map(task => {
           return (
-            <li key={task.id}><input type="checkbox" checked={task.isDone}/>
+            <li key={task.id} style={{display: "flex", justifyContent: "space-between"}}><input type="checkbox" defaultChecked={task.isDone}/>
               <span>{task.title}</span>
+              <button onClick={() => removeTask(task.id)}>x</button>
             </li>
           )
         })}
       </ul>
-      <div>
-        <button>All</button>
-        <button>Active</button>
-        <button>Completed</button>
-      </div>
     </div>
   )
 }

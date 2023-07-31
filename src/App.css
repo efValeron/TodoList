@@ -3,6 +3,7 @@
   display: flex;
 }
 
-.App > div {
-  margin-right: 50px;
+.App > ul {
+  margin: 0;
+  padding: 0;
 }
