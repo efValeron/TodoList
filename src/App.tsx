@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import {TodoList} from "./components/TodoList/TodoList";
+import {v1} from "uuid";
 
 export type FilterValuesType = "all" | "completed" | "active"
 
@@ -8,16 +9,16 @@ function App() {
   const header = "What to learn"
 
   let initTasks = [
-    {id: 1, title: "HTML&CSS", isDone: false},
-    {id: 2, title: "JS", isDone: true},
-    {id: 3, title: "ReactJS", isDone: false},
-    {id: 4, title: "Angular", isDone: true}
+    {id: v1(), title: "HTML&CSS", isDone: false},
+    {id: v1(), title: "JS", isDone: true},
+    {id: v1(), title: "ReactJS", isDone: false},
+    {id: v1(), title: "Angular", isDone: true}
   ]
 
   const [tasks, setTasks] = useState(initTasks)
   const [filter, setFilter] = useState<FilterValuesType>("all")
 
-  const removeTask = (id: number) => {
+  const removeTask = (id: string) => {
     setTasks(tasks.filter(task => task.id !== id))
   }
   const changeFilter = (value: FilterValuesType) => {
