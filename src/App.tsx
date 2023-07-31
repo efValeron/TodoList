@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import {TodoList} from "./components/TodoList/TodoList";
+import {TodoList} from "./components/TodoList";
 import {v1} from "uuid";
 
 export type FilterValuesType = "all" | "completed" | "active"
@@ -19,7 +19,7 @@ function App() {
     setTasks(tasks.filter(task => task.id !== id))
   }
   const addTask = (title: string) => {
-    setTasks([{id: v1(), title: title, isDone: false}, ...tasks])
+    if (title) setTasks([{id: v1(), title: title, isDone: false}, ...tasks])
   }
   const changeFilter = (value: FilterValuesType) => {
     setFilter(value)
