@@ -7,19 +7,19 @@ export type FilterValuesType = "all" | "completed" | "active"
 
 function App() {
   const header = "What to learn"
-
-  let initTasks = [
+  const [tasks, setTasks] = useState([
     {id: v1(), title: "HTML&CSS", isDone: false},
     {id: v1(), title: "JS", isDone: true},
     {id: v1(), title: "ReactJS", isDone: false},
     {id: v1(), title: "Angular", isDone: true}
-  ]
-
-  const [tasks, setTasks] = useState(initTasks)
+  ])
   const [filter, setFilter] = useState<FilterValuesType>("all")
 
   const removeTask = (id: string) => {
     setTasks(tasks.filter(task => task.id !== id))
+  }
+  const addTask = (title: string) => {
+    setTasks([{id: v1(), title: title, isDone: false}, ...tasks])
   }
   const changeFilter = (value: FilterValuesType) => {
     setFilter(value)
@@ -38,6 +38,7 @@ function App() {
         tasks={filteredTasks}
         removeTaskFunc={removeTask}
         changeFilterFunc={changeFilter}
+        addTask={addTask}
       />
     </div>
   );
