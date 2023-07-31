@@ -4,18 +4,18 @@ import {FilterValuesType} from "../../App";
 type PropsType = {
   header: string
   tasks: Array<Task>
-  removeTaskFunc: (id: number) => void
+  removeTaskFunc: (id: string) => void
   changeFilterFunc: (value: FilterValuesType) => void
 }
 
 type Task = {
-  id: number
+  id: string
   title: string
   isDone: boolean
 }
 
 export const TodoList = (props: PropsType) => {
-  const removeTask = (id: number) => props.removeTaskFunc(id)
+  const removeTask = (id: string) => props.removeTaskFunc(id)
 
   return (
     <div>
