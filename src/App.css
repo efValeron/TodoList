@@ -2,11 +2,32 @@
     padding: 30px;
     display: flex;
     gap: 8rem;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .App > ul {
     margin: 0;
     padding: 0;
+}
+
+.button-filter-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.todolist-ul {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    padding: 0;
+    gap: 5px;
+}
+
+.todolist-ul > li {
+    display: flex;
+    justify-content: space-between;
 }
 
 .error {
