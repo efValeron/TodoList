@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import './App.css';
 import {TodoList} from "./components/TodoList";
 import {v1} from "uuid";
-import {Button} from "./components/Button";
 import {AddItemForm} from "./components/AddItemForm";
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
+import {Menu} from "@mui/icons-material";
 
 export type FilterValuesType = "all" | "completed" | "active"
 export type Task = {
@@ -118,35 +119,53 @@ function App() {
     const filteredTasks = getFilteredTasks(tasks[todoList.id], todoList.filter)
 
     return (
-      <TodoList
-        key={todoList.id}
-        todoListId={todoList.id}
-        title={todoList.title}
-        tasks={filteredTasks}
-        activeFilter={todoList.filter}
+      <Grid item key={todoList.id}>
+        <Paper>
+          <TodoList
+            todoListId={todoList.id}
+            title={todoList.title}
+            tasks={filteredTasks}
+            activeFilter={todoList.filter}
 
-        addTask={addTask}
-        renameTask={renameTask}
-        changeIsDone={changeIsDone}
-        removeTask={removeTask}
+            addTask={addTask}
+            renameTask={renameTask}
+            changeIsDone={changeIsDone}
+            removeTask={removeTask}
 
-        addTodoList={addTodoList}
-        renameTodoList={renameTodoList}
-        changeFilter={changeTodoListFilter}
-        removeTodoList={removeTodoList}
-      />
+            addTodoList={addTodoList}
+            renameTodoList={renameTodoList}
+            changeFilter={changeTodoListFilter}
+            removeTodoList={removeTodoList}
+          />
+        </Paper>
+      </Grid>
     )
   })
 
   return (
     <div className="App">
-      <div>
-        <h3>
-          Add new TodoList
-        </h3>
-        <AddItemForm addItem={addTodoList} maxInputLength={15}/>
-      </div>
-      {todoListsList}
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton color="inherit">
+            <Menu/>
+          </IconButton>
+          <Typography variant="h6">TodoLists</Typography>
+          <Button variant="outlined" color="inherit">
+            LogOut
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <Container>
+        <Grid container sx={{p: "15px", justifyContent: "center"}}>
+          <div>
+            <h3>
+              Add new TodoList
+            </h3>
+            <AddItemForm addItem={addTodoList} maxInputLength={15}/>
+          </div>
+        </Grid>
+        {todoListsList}
+      </Container>
     </div>
   );
 }
