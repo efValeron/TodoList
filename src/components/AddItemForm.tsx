@@ -1,6 +1,6 @@
-import {Button} from "./Button";
 import React, {useState} from "react";
 import {errorMessages} from "../data";
+import {Button, TextField} from "@mui/material";
 
 type PropsType = {
   addItem: (title: string) => void
@@ -31,15 +31,17 @@ export const AddItemForm = (props: PropsType) => {
   return (
     <>
       <div>
-        <input
+        <TextField
+          error={!!error}
           value={inputValue}
           onChange={inputOnChangeHandler}
           onKeyDown={inputKeyPressHandler}
-          className={error ? "error" : ""}
+          label="Title"
+          variant="outlined"
+          helperText={error}
         />
-        <Button callBack={addItem} title={"+"}/>
+        <Button variant="contained" onClick={addItem}>Add</Button>
       </div>
-      {error && <div className={"error-message"}>{error}</div>}
     </>
   )
 }
