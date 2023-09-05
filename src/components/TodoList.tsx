@@ -2,7 +2,7 @@ import React from "react";
 import {FilterValuesType, Task} from "../App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
-import {Button, Checkbox, IconButton} from "@mui/material";
+import {Button, Checkbox, IconButton, List, ListItem} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
@@ -51,39 +51,42 @@ export const TodoList = (props: PropsType) => {
     }
 
     return (
-      <li
-        key={task.id}
-        className={task.isDone ? "is-done" : ""}
-      >
+      <ListItem key={task.id} className={task.isDone ? "is-done" : ""} style={{display: "flex", justifyContent: "space-between"}}>
         <Checkbox
           checked={task.isDone}
           onChange={(e) => changeIsDoneHandler(task.id, e.currentTarget.checked)}
-          icon={<CheckBoxOutlineBlankIcon />}
-          checkedIcon={<CheckBoxIcon />} />
+          icon={<CheckBoxOutlineBlankIcon/>}
+          checkedIcon={<CheckBoxIcon/>}/>
         <EditableSpan title={task.title} changeTitle={changeTaskTitle}/>
         <IconButton aria-label="delete" onClick={() => removeTaskHandler(task.id)}>
-          <DeleteIcon />
+          <DeleteIcon/>
         </IconButton>
-      </li>
+      </ListItem>
     )
   }) : null
 
   return (
-    <div>
-      <h3>
+    <div style={{display: "flex", flexDirection: "column", gap: "1rem"}}>
+      <h3 style={{display: "flex", justifyContent: "space-between"}}>
         <EditableSpan title={props.title} changeTitle={changeTodoListTitle}/>
         <IconButton aria-label="delete" onClick={removeTodolistHandler}>
-          <DeleteIcon />
+          <DeleteIcon/>
         </IconButton>
       </h3>
       <AddItemForm addItem={addTaskHandler} maxInputLength={15}/>
-      <div className="button-filter-group">
-        <Button variant={props.activeFilter === "all" ? "contained" : "outlined"} onClick={() => changeFilterToStateHandler("all")}>All</Button>
-        <Button variant={props.activeFilter === "active" ? "contained" : "outlined"} onClick={() => changeFilterToStateHandler("active")}>Active</Button>
-        <Button variant={props.activeFilter === "completed" ? "contained" : "outlined"} onClick={() => changeFilterToStateHandler("completed")}>Completed</Button>
+      <div style={{display: "flex", justifyContent: "space-between"}}>
+        <Button variant={props.activeFilter === "all" ? "contained" : "outlined"}
+                onClick={() => changeFilterToStateHandler("all")}>All</Button>
+        <Button variant={props.activeFilter === "active" ? "contained" : "outlined"}
+                onClick={() => changeFilterToStateHandler("active")}>Active</Button>
+        <Button variant={props.activeFilter === "completed" ? "contained" : "outlined"}
+                onClick={() => changeFilterToStateHandler("completed")}>Completed</Button>
       </div>
-      <ul className="todolist-ul">
+      <List>
         {tasksList}
+      </List>
+      <ul className="todolist-ul">
+
       </ul>
     </div>
   )
