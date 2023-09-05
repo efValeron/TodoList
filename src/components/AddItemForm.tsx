@@ -29,19 +29,17 @@ export const AddItemForm = (props: PropsType) => {
   }
 
   return (
-    <>
-      <div>
-        <TextField
-          error={!!error}
-          value={inputValue}
-          onChange={inputOnChangeHandler}
-          onKeyDown={inputKeyPressHandler}
-          label="Title"
-          variant="outlined"
-          helperText={error}
-        />
-        <Button variant="contained" onClick={addItem}>Add</Button>
-      </div>
-    </>
+    <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+      <TextField
+        error={!!error}
+        value={inputValue}
+        onChange={inputOnChangeHandler}
+        onKeyDown={inputKeyPressHandler}
+        label="Title"
+        variant="outlined"
+        helperText={error}
+      />
+      <Button variant="contained" onClick={addItem}>Add</Button>
+    </div>
   )
 }
