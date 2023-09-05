@@ -119,8 +119,8 @@ function App() {
     const filteredTasks = getFilteredTasks(tasks[todoList.id], todoList.filter)
 
     return (
-      <Grid item key={todoList.id}>
-        <Paper>
+      <Grid item xs={3} key={todoList.id}>
+        <Paper style={{padding: "1rem 2rem"}}>
           <TodoList
             todoListId={todoList.id}
             title={todoList.title}
@@ -155,19 +155,20 @@ function App() {
           </Button>
         </Toolbar>
       </AppBar>
-      <Container>
-        <Grid container sx={{p: "15px", justifyContent: "center"}}>
-          <div>
-            <h3>
-              Add new TodoList
-            </h3>
-            <AddItemForm addItem={addTodoList} maxInputLength={15}/>
-          </div>
+      <div style={{padding: "2rem", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", gap: "2rem"}}>
+        <div>
+          <h3>
+            Add new TodoList
+          </h3>
+          <AddItemForm addItem={addTodoList} maxInputLength={15}/>
+        </div>
+        <Grid container spacing={2}>
+          {todoListsList}
         </Grid>
-        {todoListsList}
-      </Container>
+      </div>
     </div>
-  );
+  )
+    ;
 }
 
 export default App;
