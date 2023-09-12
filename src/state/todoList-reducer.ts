@@ -36,19 +36,19 @@ export const todoListReducer = (state: TodolistType[], action: ActionType): Todo
     case "CHANGE-TODOLIST-FILTER":
       return state.map(tl => tl.id === action.id ? {...tl, filter: action.filter} : tl)
     default:
-      throw new Error("Invalid action!")
+      return state
   }
 }
 
-export const RemoveTodoListAC = (id: string): RemoveTodoListActionType => {
+export const removeTodoListAC = (id: string): RemoveTodoListActionType => {
   return {type: 'REMOVE-TODOLIST', id}
 }
-export const AddTodoListAC = (title: string): AddTodoListActionType => {
+export const addTodoListAC = (title: string): AddTodoListActionType => {
   return {type: 'ADD-TODOLIST', title}
 }
-export const RenameTodoListAC = (id: string, title: string): RenameTodoListActionType => {
+export const renameTodoListAC = (id: string, title: string): RenameTodoListActionType => {
   return {type: 'RENAME-TODOLIST', id, title}
 }
-export const ChangeTodoListFilterAC = (id: string, filter: FilterValuesType): ChangeTodoListFilterActionType => {
+export const changeTodoListFilterAC = (id: string, filter: FilterValuesType): ChangeTodoListFilterActionType => {
   return {type: 'CHANGE-TODOLIST-FILTER', id, filter}
 }
