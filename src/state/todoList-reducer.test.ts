@@ -20,10 +20,11 @@ test('should remove todo', () => {
 })
 
 test('should add todo', () => {
-  const endState = todoListReducer(startState, addTodoListAC("new todo"))
+  const endState = todoListReducer(startState, addTodoListAC("3", "new todo"))
 
   expect(endState.length).toBe(3)
   expect(endState[0].title).toBe("new todo")
+  expect(endState[0].id).toBe("3")
 })
 
 test('should rename todo', () => {
