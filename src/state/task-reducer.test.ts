@@ -1,5 +1,12 @@
 import {TasksStateType} from "../App";
-import {addTaskAC, changeTaskIsDoneAC, removeTaskAC, renameTaskAC, taskReducer} from "./task-reducer";
+import {
+  addEmptyTodoListAC,
+  addTaskAC,
+  changeTaskIsDoneAC,
+  removeTaskAC, removeTodoListPropertyAC,
+  renameTaskAC,
+  taskReducer
+} from "./task-reducer";
 
 const startState: TasksStateType = {
   ["1"]: [
@@ -39,4 +46,18 @@ test('should remove task', () => {
 
   expect(endState["1"].length).toBe(2)
   expect(endState["1"][endState["1"].length - 1].id).toBe("2")
+})
+
+test('should add empty tasks as new todo', () => {
+  const endState = taskReducer(startState, addEmptyTodoListAC("3"))
+
+  expect(Object.keys(endState).length).toBe(3)
+  expect(endState["3"].length).toBe(0)
+})
+
+test('should remove todo', () => {
+  const endState = taskReducer(startState, removeTodoListPropertyAC("1"))
+
+  expect(Object.keys(endState).length).toBe(1)
+  expect(endState["1"]).toBeUndefined()
 })
