@@ -23,10 +23,20 @@ type RemoveTaskActionType = {
   todoListId: string
   id: string
 }
+type AddEmptyTodoListActionType = {
+  type: "ADD-EMPTY-TODOLIST"
+  todoListId: string
+}
+type RemoveTodoListPropertyActionType = {
+  type: "REMOVE-TODOLIST-PROPERTY"
+  todoListId: string
+}
 type ActionType = AddTaskActionType
   | RenameTaskActionType
   | ChangeTaskIsDoneActionType
   | RemoveTaskActionType
+  | AddEmptyTodoListActionType
+  | RemoveTodoListPropertyActionType
 
 export const taskReducer = (state: TasksStateType, action: ActionType): TasksStateType => {
   switch (action.type) {
@@ -56,6 +66,12 @@ export const taskReducer = (state: TasksStateType, action: ActionType): TasksSta
       }
     case "REMOVE-TASK":
       return {...state, [action.todoListId]: state[action.todoListId].filter(task => task.id !== action.id)}
+    case "ADD-EMPTY-TODOLIST":
+      return {...state, [action.todoListId]: []}
+    case "REMOVE-TODOLIST-PROPERTY":
+      const updatedTasks = {...state}
+      delete updatedTasks[action.todoListId]
+      return updatedTasks
     default:
       return state
   }
@@ -72,4 +88,10 @@ export const changeTaskIsDoneAC = (todoListId: string, id: string, isDone: boole
 }
 export const removeTaskAC = (todoListId: string, id: string): RemoveTaskActionType => {
   return {type: "REMOVE-TASK", todoListId, id}
+}
+export const addEmptyTodoListAC = (todoListId: string): AddEmptyTodoListActionType => {
+  return {type: "ADD-EMPTY-TODOLIST", todoListId}
+}
+export const removeTodoListPropertyAC = (todoListId: string): RemoveTodoListPropertyActionType => {
+  return {type: "REMOVE-TODOLIST-PROPERTY", todoListId}
 }
