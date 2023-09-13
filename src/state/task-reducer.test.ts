@@ -1,12 +1,5 @@
 import {TasksStateType} from "../App";
-import {
-  addEmptyTodoListAC,
-  addTaskAC,
-  changeTaskIsDoneAC,
-  removeTaskAC, removeTodoListPropertyAC,
-  renameTaskAC,
-  taskReducer
-} from "./task-reducer";
+import {addTaskAC, changeTaskIsDoneAC, removeTaskAC, renameTaskAC, taskReducer} from "./task-reducer";
 
 const startState: TasksStateType = {
   ["1"]: [
@@ -48,16 +41,49 @@ test('should remove task', () => {
   expect(endState["1"][endState["1"].length - 1].id).toBe("2")
 })
 
-test('should add empty tasks as new todo', () => {
-  const endState = taskReducer(startState, addEmptyTodoListAC("3"))
+test('correct task should be added to correct array', () => { // not mine
+  const localState: TasksStateType = {
+    "todolistId1": [
+      {id: "1", title: "CSS", isDone: false},
+      {id: "2", title: "JS", isDone: true},
+      {id: "3", title: "React", isDone: false}
+    ],
+    "todolistId2": [
+      {id: "1", title: "bread", isDone: false},
+      {id: "2", title: "milk", isDone: true},
+      {id: "3", title: "tea", isDone: false}
+    ]
+  };
 
-  expect(Object.keys(endState).length).toBe(3)
-  expect(endState["3"].length).toBe(0)
+  const action = addTaskAC("todolistId2", "juce");
+
+  const endState = taskReducer(localState, action)
+
+  expect(endState["todolistId1"].length).toBe(3);
+  expect(endState["todolistId2"].length).toBe(4);
+  expect(endState["todolistId2"][0].id).toBeDefined();
+  expect(endState["todolistId2"][0].title).toBe("juce");
+  expect(endState["todolistId2"][0].isDone).toBe(false);
 })
 
-test('should remove todo', () => {
-  const endState = taskReducer(startState, removeTodoListPropertyAC("1"))
+test('status of specified task should be changed', () => { // not mine
+  const localState: TasksStateType = {
+    "todolistId1": [
+      {id: "1", title: "CSS", isDone: false},
+      {id: "2", title: "JS", isDone: true},
+      {id: "3", title: "React", isDone: false}
+    ],
+    "todolistId2": [
+      {id: "1", title: "bread", isDone: false},
+      {id: "2", title: "milk", isDone: true},
+      {id: "3", title: "tea", isDone: false}
+    ]
+  };
 
-  expect(Object.keys(endState).length).toBe(1)
-  expect(endState["1"]).toBeUndefined()
-})
+  const action = changeTaskIsDoneAC("todolistId2", "2", false);
+
+  const endState = taskReducer(localState, action)
+
+  expect(endState["todolistId1"][1].isDone).toBeTruthy()
+  expect(endState["todolistId2"][1].isDone).toBeFalsy()
+});
