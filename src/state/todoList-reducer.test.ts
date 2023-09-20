@@ -5,9 +5,9 @@ import {
   renameTodoListAC,
   todoListReducer
 } from './todoList-reducer'
-import {TodolistType} from "../App";
+import {TodoListType} from "../App";
 
-const startState: TodolistType[] = [
+const startState: TodoListType[] = [
   {id: "1", title: "What to learn", filter: "all"},
   {id: "2", title: "What to buy", filter: "all"},
 ]
@@ -20,7 +20,7 @@ test('should remove todo', () => {
 })
 
 test('should add todo', () => {
-  const endState = todoListReducer(startState, addTodoListAC( "new todo"))
+  const endState = todoListReducer(startState, addTodoListAC("new todo"))
 
   expect(endState.length).toBe(3)
   expect(endState[0].title).toBe("new todo")

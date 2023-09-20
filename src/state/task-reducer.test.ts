@@ -1,7 +1,7 @@
-import {TasksStateType} from "../App";
+import {TasksType} from "../App";
 import {addTaskAC, changeTaskIsDoneAC, removeTaskAC, renameTaskAC, taskReducer} from "./task-reducer";
 
-const startState: TasksStateType = {
+const startState: TasksType = {
   ["1"]: [
     {id: "1", title: "HTML&CSS", isDone: false},
     {id: "2", title: "JS", isDone: true},
@@ -42,7 +42,7 @@ test('should remove task', () => {
 })
 
 test('correct task should be added to correct array', () => { // not mine
-  const localState: TasksStateType = {
+  const localState: TasksType = {
     "todolistId1": [
       {id: "1", title: "CSS", isDone: false},
       {id: "2", title: "JS", isDone: true},
@@ -67,7 +67,7 @@ test('correct task should be added to correct array', () => { // not mine
 })
 
 test('status of specified task should be changed', () => { // not mine
-  const localState: TasksStateType = {
+  const localState: TasksType = {
     "todolistId1": [
       {id: "1", title: "CSS", isDone: false},
       {id: "2", title: "JS", isDone: true},
