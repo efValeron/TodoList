@@ -21,15 +21,36 @@ function App() {
 
   return (
     <div className="App">
+      {/*<AppBar position="static">*/}
+      {/*  <Toolbar style={{display: "flex", justifyContent: "space-between"}}>*/}
+      {/*    <div style={{display: "flex", alignItems: "center"}}>*/}
+      {/*      <IconButton color="inherit">*/}
+      {/*        <Menu/>*/}
+      {/*      </IconButton>*/}
+
+      {/*      <Typography variant="h6">TodoLists</Typography>*/}
+      {/*    </div>*/}
+
+      {/*    <Button variant="outlined" color="inherit">*/}
+      {/*      LogOut*/}
+      {/*    </Button>*/}
+      {/*  </Toolbar>*/}
+      {/*</AppBar>*/}
       <AppBar position="static">
         <Toolbar>
-          <IconButton color="inherit">
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
             <Menu/>
           </IconButton>
-          <Typography variant="h6">TodoLists</Typography>
-          <Button variant="outlined" color="inherit">
-            LogOut
-          </Button>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Todolists
+          </Typography>
+          <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
       <div style={{
