@@ -29,7 +29,13 @@ export const AddItemForm = (props: PropsType) => {
   }
 
   return (
-    <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+    <div style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexWrap: "wrap",
+      gap: "1rem"
+    }}>
       <TextField
         error={!!error}
         value={inputValue}
@@ -41,5 +47,6 @@ export const AddItemForm = (props: PropsType) => {
       />
       <Button variant="contained" onClick={addItem}>Add</Button>
     </div>
+
   )
 }
