@@ -1,5 +1,6 @@
-import {TasksType} from "../App";
+
 import {addTaskAC, changeTaskIsDoneAC, removeTaskAC, renameTaskAC, taskReducer} from "./task-reducer";
+import {TasksType} from "../components/TodoList";
 
 const startState: TasksType = {
   ["1"]: [
