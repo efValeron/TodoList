@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
-import {AppBar, Button, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
+import {AppBar, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./state/store";
 import {addTodoListAC} from "./state/todoList-reducer";
 import {AddItemForm} from "./components/AddItemForm";
 import {TodoList} from "./components/TodoList";
+import {CustomButton} from './components/CustomButton';
 
 export type FilterValuesType = "all" | "completed" | "active"
 export type TodoListType = {
@@ -18,6 +19,8 @@ export type TodoListType = {
 function App() {
   const dispatch = useDispatch()
   const todoLists = useSelector<RootState, TodoListType[]>(state => state.todoLists)
+
+  const adTodoList = useCallback((title: string) => dispatch(addTodoListAC(title)), [dispatch])
 
   return (
     <div className="App">
@@ -35,7 +38,7 @@ function App() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Todolists
           </Typography>
-          <Button color="inherit">Login</Button>
+          <CustomButton color="inherit">Login</CustomButton>
         </Toolbar>
       </AppBar>
       <div style={{
@@ -50,7 +53,7 @@ function App() {
           <h3>
             Add new TodoList
           </h3>
-          <AddItemForm addItem={(title: string) => dispatch(addTodoListAC(title))} maxInputLength={15}/>
+          <AddItemForm addItem={adTodoList} maxInputLength={15}/>
         </div>
         <Grid container spacing={2}>
           {
