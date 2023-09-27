@@ -21,21 +21,6 @@ function App() {
 
   return (
     <div className="App">
-      {/*<AppBar position="static">*/}
-      {/*  <Toolbar style={{display: "flex", justifyContent: "space-between"}}>*/}
-      {/*    <div style={{display: "flex", alignItems: "center"}}>*/}
-      {/*      <IconButton color="inherit">*/}
-      {/*        <Menu/>*/}
-      {/*      </IconButton>*/}
-
-      {/*      <Typography variant="h6">TodoLists</Typography>*/}
-      {/*    </div>*/}
-
-      {/*    <Button variant="outlined" color="inherit">*/}
-      {/*      LogOut*/}
-      {/*    </Button>*/}
-      {/*  </Toolbar>*/}
-      {/*</AppBar>*/}
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -71,7 +56,7 @@ function App() {
           {
             todoLists.map(todoList =>
               <Grid item xs={3} key={todoList.id}>
-                <Paper style={{padding: "1rem 2rem"}}>
+                <Paper style={{padding: "0.5rem 1rem"}}>
                   <TodoList
                     todoListId={todoList.id}
                     title={todoList.title}
