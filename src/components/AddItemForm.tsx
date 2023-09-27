@@ -1,13 +1,14 @@
-import React, {useState} from "react";
+import React, {memo, useState} from "react";
 import {errorMessages} from "../data";
-import {Button, TextField} from "@mui/material";
+import {TextField} from "@mui/material";
+import {CustomButton} from "./CustomButton";
 
 type PropsType = {
   addItem: (title: string) => void
   maxInputLength: number
 }
 
-export const AddItemForm = (props: PropsType) => {
+export const AddItemForm = memo((props: PropsType) => {
   const [inputValue, setInputValue] = useState("")
   const [error, setError] = useState<string | null>(null)
 
@@ -45,8 +46,8 @@ export const AddItemForm = (props: PropsType) => {
         variant="outlined"
         helperText={error}
       />
-      <Button variant="contained" onClick={addItem}>Add</Button>
+      <CustomButton variant="contained" onClick={addItem}>Add</CustomButton>
     </div>
 
   )
-}
+})
