@@ -1,13 +1,13 @@
-import React from 'react'
+import React, {memo, useState} from 'react'
 import {TextField} from "@mui/material";
 
 type PropsType = {
   title: string
   changeTitle: (newTitle: string) => void
 }
-export const EditableSpan = (props: PropsType) => {
-  const [editMode, setEditMode] = React.useState(false)
-  const [title, setTitle] = React.useState(props.title)
+export const EditableSpan = memo((props: PropsType) => {
+  const [editMode, setEditMode] = useState(false)
+  const [title, setTitle] = useState(props.title)
 
   const activateEditMode = () => {
     setEditMode(true)
@@ -34,4 +34,4 @@ export const EditableSpan = (props: PropsType) => {
       />
       : <span onDoubleClick={activateEditMode}>{title}</span>
   )
-}
+})
