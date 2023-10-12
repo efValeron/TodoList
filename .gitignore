@@ -23,3 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 .idea
+
+/src/stories/button.css
+/src/stories/Button.stories.ts
+/src/stories/Button.tsx
+/src/stories/Configure.mdx
