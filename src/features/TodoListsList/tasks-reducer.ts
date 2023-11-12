@@ -22,9 +22,12 @@ const slice = createSlice({
       state,
       action: PayloadAction<{ taskId: string; model: UpdateDomainTaskModelType; todolistId: string }>,
     ) => {
-      const tasks = state[action.payload.todolistId]
-      const index = tasks.findIndex((todo) => todo.id === action.payload.taskId)
-      if (index !== -1) tasks[index] = { ...tasks[index], ...action.payload.model }
+      const index = state[action.payload.todolistId].findIndex((task) => task.id === action.payload.taskId)
+      if (index !== -1)
+        state[action.payload.todolistId][index] = {
+          ...state[action.payload.todolistId][index],
+          ...action.payload.model,
+        }
     },
     setTasks: (state, action: PayloadAction<{ tasks: Array<TaskType>; todolistId: string }>) => {
       state[action.payload.todolistId] = action.payload.tasks
