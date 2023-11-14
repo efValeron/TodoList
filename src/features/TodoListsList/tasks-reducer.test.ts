@@ -126,19 +126,10 @@ test("status of specified task should be changed", () => {
     todolistId: "todolistId2",
   })
 
-  // const endState = tasksReducer(startState, action)
+  const endState = tasksReducer(startState, action)
 
-  const index = startState[action.payload.todolistId].findIndex((task) => task.id === action.payload.taskId)
-  if (index !== -1)
-    startState[action.payload.todolistId][index] = {
-      ...startState[action.payload.todolistId][index],
-      ...action.payload.model,
-    }
-
-  // expect(endState["todolistId1"][1].status).toBe(TaskStatuses.Completed)
-  // expect(endState["todolistId2"][1].status).toBe(TaskStatuses.New)
-  expect(startState["todolistId1"][1].status).toBe(TaskStatuses.Completed)
-  expect(startState["todolistId2"][1].status).toBe(TaskStatuses.New)
+  expect(endState["todolistId1"][1].status).toBe(TaskStatuses.Completed)
+  expect(endState["todolistId2"][1].status).toBe(TaskStatuses.New)
 })
 test("title of specified task should be changed", () => {
   const action = tasksActions.updateTask({
